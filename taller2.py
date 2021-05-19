@@ -5,6 +5,7 @@ from time import *
 import operator 
 responses = {}
 lastValidHoop = -1
+no_response = 0
 
 for ttl in range(1,25):
     ips_of_this_Hoop = {}
@@ -29,10 +30,14 @@ for ttl in range(1,25):
             drtt = 0
         else:
             drtt = (ips_of_this_Hoop[ipMasUsada][1]/ips_of_this_Hoop[ipMasUsada][0]) - responses[lastValidHoop][0][1]
-            
+
         rttPromedio = (ips_of_this_Hoop[ipMasUsada][1]/ips_of_this_Hoop[ipMasUsada][0])    
         responses[ttl] = []
         responses[ttl].append((ipMasUsada,rttPromedio,drtt))
         print(ttl,responses[ttl] )
-        lastValidHoop = ttl    
+        lastValidHoop = ttl
+    else:
+        no_response+= 1
+
+print("% saltos sin respuesta: ", no_response*100/ttl) 
               
